@@ -1,0 +1,33 @@
+{% load i18n %}
+<div id="carousel-{{ selector }}" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for image in images %}
+            <li data-target="#carousel-{{ selector }}" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter == 0 %}class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for image in images %}
+            <div class="item{% if forloop.counter0 == 0 %} active{% endif %}">
+                <img src="{{ image.get_absolute_url }}" alt="{{ image.title }}" height="318" width="214">
+                {% if display_caption %}
+                <div class="carousel-caption">
+                    {{ image.title }}
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-{{ selector }}" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">{% trans "Previous" %}</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-{{ selector }}" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">{% trans "Next" %}</span>
+    </a>
+</div>

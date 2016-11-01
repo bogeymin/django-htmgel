@@ -1,0 +1,42 @@
+{% load i18n %}
+
+<div class="row">
+    <nav aria-label="{% trans "Page Navigation" %}">
+        <ul class="pagination">
+            {% if objects.has_previous %}
+                <li>
+                    <!-- ugly, but allows tags and filtering to pass through pagination -->
+                    <a href="?page={{ objects.previous_page_number }}{% for key, value in request.GET.items %}{% ifnotequal key "page" %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}" aria-label="{% trans "Previous" %}">
+                        {% trans "Previous" %} <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span>
+                        <span aria-hidden="true">
+                            {% trans "Previous" %} <span aria-hidden="true">&laquo;</span>
+                        </span>
+                    </span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if objects.has_next %}
+                <li>
+                    <!-- ugly, but allows tags and filtering to pass through pagination -->
+                    <a href="?page={{ objects.next_page_number }}{% for key, value in request.GET.items %}{% ifnotequal key "page" %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}" aria-label="{% trans "Previous" %}">
+                        {% trans "Next" %} <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <span>
+                        <span aria-hidden="true">
+                            {% trans "Next" %} <span aria-hidden="true">&raquo;</span>
+                        </span>
+                    </span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>

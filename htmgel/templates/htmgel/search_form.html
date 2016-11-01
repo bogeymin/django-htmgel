@@ -1,0 +1,27 @@
+{% comment %}
+search_form.html
+================
+
+Display a form for searching.
+
+**navbar** (bool) Indicates the form is to be displayed along side navigation.
+
+**url** (str) Optional. The submit url. Defaults to ``/search/``.
+
+**search_query** (str) The keywords used in the search, if any.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/search_form.html" with navbar=True %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/search_form.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/search_form.html" %}
+{% else %}
+    <!-- no default for search_form -->
+{% endif %}

@@ -1,0 +1,17 @@
+<table class="table {% if table.border}table-bordered{% endif %}{% if table.is_striped %}table-striped{% endif %}">
+    {% if table.caption %}<caption>{{ table.caption }}</caption>
+    <thead>
+        {% for column in table.columns %}
+            <th>{{ column }}</th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for row in table.rows %}
+            <tr>
+                {% for td in row.data %}
+                    <td>{{ td }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

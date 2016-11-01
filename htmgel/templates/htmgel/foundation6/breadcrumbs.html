@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% if breadcrumbs %}
+    <nav aria-label="{{ label }}" role="navigation">
+        <ul class="breadcrumbs">
+            {% if include_home %}
+                <li><a href="/">{% trans "Home" %}</a></li>
+            {% endif %}
+            {% for crumb in breadcrumbs %}
+                {% if forloop.last %}
+                    <li>
+                        <span class="show-for-sr">{% trans "Current:" %} </span>
+                        {{ crumb.title }}
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ crumb.get_absolute_url }}">{{ crumb.title }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}}

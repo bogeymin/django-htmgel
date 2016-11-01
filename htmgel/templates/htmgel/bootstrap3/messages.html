@@ -1,0 +1,3 @@
+{% for message in messages %}
+    {% include "htmgel/alert.html" with status=message.tags %}
+{% endfor %}

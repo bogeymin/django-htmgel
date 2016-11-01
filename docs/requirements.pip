@@ -1,0 +1,3 @@
+sphinx
+sphinx-rtd-theme
+-e git+https://bitbucket.org/develmaycare/sphinx-helpers/get/master.zip#egg=sphinx_helpers

@@ -1,0 +1,13 @@
+<ul class="list-group">
+    {% for object in objects %}
+        {% if enable_links %}
+            <a href="{{ object.get_absolute_url }}" class="list-group-item{% ifequal active_id object.pk %} active{% endifequal %}">
+                {{ object.title }}
+            </a>
+        {% else %}
+            <li class="list-group-item">
+                {{ object.title }}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

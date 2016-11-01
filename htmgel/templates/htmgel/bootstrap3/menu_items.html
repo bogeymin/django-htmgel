@@ -1,0 +1,15 @@
+<ul class="nav navbar-nav">
+    {% for title, url, name, permission_required in menu_items %}
+        {% if permission_required %}
+            {% if permission_required in perms %}
+                <li{% if active_page == name %} class="active"{% endif %}>
+                    <a href="{{ url }}">{{ title }}</a>
+                </li>
+            {% endif %}
+        {% else %}
+            <li{% if active_page == name %} class="active"{% endif %}>
+                <a href="{{ url }}">{{ title }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% if breadcrumbs %}
+    <ol class="breadcrumb">
+        {% if include_home %}
+            <li>
+                <a href="/">{% trans "Home" %}</a>
+            </li>
+        {% endif %}
+        {% for crumb in breadcrumbs %}
+            {% if forloop.last %}
+                <li class="active">{{ crumb.title }}</li>
+            {% else %}
+                <li>
+                    <a href="{{ crumb.get_absolute_url }}">{{ crumb.title }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endif %}

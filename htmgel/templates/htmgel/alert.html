@@ -1,0 +1,32 @@
+{% comment %}
+alert.html
+==========
+
+Create an alert.
+
+**enable_close** (bool) Make it possible to close the alert.
+
+**label** (str) Optional. Introduces the message.
+
+**message** (str) The message to be displayed.
+
+**status** (str) The nature of the alert: ``info``, ``success``, ``warning``, or ``error``. Defaults to ``error``.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/alert.html" with label="Snap!" message="Something has gone horribly wrong." %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/alert.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/alert.html" %}
+{% else %}
+    <p class="alert {{ status|default:"error" }}">
+        {% if label %}<b>{{ label }}</b> {% endif %}
+        {{ message }}
+    </p>
+{% endif %}

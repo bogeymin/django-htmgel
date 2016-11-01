@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% if navbar %}
+    <form action="{{ url|default:"/search/" }}" class="navbar-form navbar-right" method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" id="query" name="query" placeholder="{% trans "search terms" %}" value="{{ search_query|default_if_none:"" }}">
+        </div>
+        <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span> {% trans "Search" %}
+        </button>
+    </form>
+{% else %}
+    <form action="{{ url|default:"/search/" }" class="form" method="get">
+        <div class="form-group">
+            <label for="query">{% trans "Keywords" %}</label>
+            <input type="text" class="form-control" id="query" name="query" placeholder="{% trans "search terms" %}" value="{{ search_query|default_if_none:"" }}">
+        </div>
+        <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
+        {% if search_query %}
+            <a href="{{ url|default:"/search/" }">{% trans "Reset" %}</a>
+        {% endif %}
+    </form>
+{% endif %}

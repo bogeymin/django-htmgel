@@ -1,0 +1,29 @@
+{% comment %}
+crud.html
+=========
+
+Display the appropriate CRUD label.
+
+**value** (str) The value of CRUD: create, retrieve, update, delete.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/crud.html" with value="create" %}
+
+{% endcomment %}
+
+{% load i18n %}
+
+{% if value == "create" %}
+    {% trans "Add" %}
+{% elif value == "retrieve" %}
+    {% trans "List" %}
+{% elif value == "update" %}
+    {% trans "Edit" %}
+{% elif value == "delete" %}
+    {% trans "Delete" %}
+{% else %}
+    {# do nothing #}
+{% endif %}

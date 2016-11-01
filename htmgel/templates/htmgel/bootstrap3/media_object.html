@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load static %}
+
+<div class="media">
+    <div class="media-left">
+        <a href="{{ object.get_absolute_url }}">
+            {% if object.thumbnail %}
+                <img src="{{ object.thumbnail }}" class="img-rounded media-object" alt="{{ object.title }}" height="64" width="64" %}>
+            {% else %}
+                <img src="{% static "images/blank-media-object.png" %}" height="64" width="64">
+            {% endif %}
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">{{ object.title }}</h4>
+        <p>
+            {{ object.description|truncatewords:40 }}
+        </p>
+        <a class="btn btn-primary" href="{{ object.get_absolute_url }}">
+            {% trans "More" %}
+        </a>
+    </div>
+</div>

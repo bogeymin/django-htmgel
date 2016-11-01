@@ -1,0 +1,27 @@
+{% comment %}
+form_field.html
+===============
+
+Display a form field.
+
+**field** (instance) The field instance must be in the context for passed specifically to the template.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/form_field.html" %}
+
+.. note::
+    This requires that ``htmgel_tags`` be enabled in order to identify the widget. Also note that this template is
+    rarely used directly. See ``form.html``.
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/form_field.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/form_field.html" %}
+{% else %}
+    <!-- no default for form -->
+{% endif %}

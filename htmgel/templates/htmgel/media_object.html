@@ -1,0 +1,33 @@
+{% comment %}
+media_object.html
+=================
+
+Display a media object.
+
+**object** (instance) The object to be displayed. The object must implement the methods or properties listed below.
+
+Object properties:
+
+- description: Truncated to 40 characters.
+- get_absolute_url()
+- thumbnail: The URL of the thumbnail to display.
+- title: A title for the object.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/media_object.html" with object=todo %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/media_object.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/media_object.html" %}
+{% else %}
+    <a href="{{ object.get_absolute_url }}">
+        <img src="{{ object.thumbnail }}">
+        {{ object.title }}
+    </a>
+{% endif %}

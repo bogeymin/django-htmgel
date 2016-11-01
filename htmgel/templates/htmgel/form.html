@@ -1,0 +1,33 @@
+{% comment %}
+form.html
+=========
+
+A generic means for display most types of forms.
+
+**action** (str) The URL to where the form will be sent.
+
+**enable_close** (bool) Make it possible to close the alert.
+
+**form** (instance) The form instance must be in the context for passed specifically to the template.
+
+**form_class** (str) ``horizontal`` (default) or ``inline``.
+
+**method** (str) ``get`` or ``post`` (default).
+
+**multipart** (bool) ``True`` or ``False`` (default).
+
+Example:
+
+.. code::
+
+    {% include "htmgel/form.html" %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/form.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/form.html" %}
+{% else %}
+    <!-- no default for form -->
+{% endif %}

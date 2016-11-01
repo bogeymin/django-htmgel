@@ -1,0 +1,23 @@
+{% comment %}
+pagination.html
+===============
+
+Create list pagination.
+
+**objects** (Paginator) A Django pagination object.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/pagination.html" with objects=projects %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/pagination.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/pagination.html" %}
+{% else %}
+    <!-- no default for pagination -->
+{% endif %}

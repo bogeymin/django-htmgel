@@ -1,0 +1,25 @@
+{% comment %}
+menu_items.html
+===============
+
+Create a navigation menu.
+
+**active_page** (str) The name of the active page.
+
+**menu_items** (iterable) A list or tuple containing an iterable in the form of ``[title, url, name, permissions]``.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/menu_items.html" with active_page="home" %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/menu_items.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/menu_items.html" %}
+{% else %}
+    <!-- no default for menu_items -->
+{% endif %}

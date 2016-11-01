@@ -1,0 +1,12 @@
+{# Alerts are called "Callouts" in Foundation 6. #}
+<div class="callout {% if status == "info" %}primary{% elif status == "success" %}success{% elif status == "warning" %}warning{% else %}alert{% endif %}"{% if enable_close %} data-closable{% endif %}>
+    {% if label %}
+        <h5>{{ label }}</h5>
+    {% endif %}
+    <p>{{ message }}</p>
+    {% if enable_close %}
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+        </button>
+    {% endif %}
+</div>

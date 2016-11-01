@@ -1,0 +1,29 @@
+{% comment %}
+messages.html
+=============
+
+A wrapper around ``alert.html`` that deals with multiple messages at once.
+
+**enable_close** (bool) Make it possible to close the alert.
+
+**messages** (iterable) The messages to be displayed.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/messages.html" %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/alert.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/alert.html" %}
+{% else %}
+    {% for message in messages %}
+        <p class="alert {{ message.tags|default:"error" }}">
+            {{ message }}
+        </p>
+    {% endfor %}
+{% endif %}

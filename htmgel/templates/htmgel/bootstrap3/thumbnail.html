@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load static %}
+
+<div class="thumbnail">
+
+    {% if object.thumbnail %}
+        <img src="{{ object.thumbnail }}" alt="{{ object.title }}" height="{{ height|default:273 }}" width="{{ width|default:200 }}">
+        {% image object.thumbnail fill-273x200 alt="{{ object }}" %}
+    {% else %}
+        <img src="{% static "images/blank-media-object.png" %}" height="{{ height|default:273 }" width="{ width|default:200 }}">
+    {% endif %}
+
+    <div class="caption">
+        <h3>{{ object.title }}</h3>
+        <p>
+            {{ object.description:truncatewords:40 }}
+        </p>
+        <p>
+            <a href="{{ object.get_absolute_url }}" class="btn btn-primary" role="button">
+                {% trans "More" %}
+            </a>
+        </p>
+    </div>
+
+</div>
