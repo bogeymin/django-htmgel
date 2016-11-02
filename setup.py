@@ -39,7 +39,7 @@ setup(
     long_description=get_description(),
     author='Shawn Davis',
     author_email='shawn@ptltd.co',
-    url='https://github.com/bogeymin/htmgel',
+    url='https://github.com/bogeymin/django-htmgel',
     packages=find_packages(),
     install_requires=["BeautifulSoup"],
     classifiers=[

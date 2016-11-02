@@ -12,17 +12,17 @@ The API is changing at a rapid pace. Use at your own risk.
 
 To install:
 
-	pip install https://github.com/bogeymin/htmgel/zipball/master;
+	pip install https://github.com/bogeymin/django-htmgel/zipball/master;
 
 Or in your requirements file:
 
-	-e git+https://github.com/bogeymin/htmgel/zipball/master#egg=htmgel
+	-e git+https://github.com/bogeymin/django-htmgel/zipball/master#egg=htmgel
 
 Or in your ``setup.py`` file:
 
-	install_requires=["htmgel"],
+	install_requires=["django-htmgel"],
 	dependency_links=[
-		"https://github.com/bogeymin/htmgel/zipball/master",
+		"https://github.com/bogeymin/django-htmgel/zipball/master",
 	]
 
 ## Settings
