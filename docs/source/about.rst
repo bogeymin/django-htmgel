@@ -19,13 +19,13 @@ To install:
 
 .. code-block:: bash
 
-    pip install https://github.com/bogeymin/htmgel/zipball/master;
+    pip install https://github.com/bogeymin/django-htmgel/zipball/master;
 
 Or in your requirements file:
 
 .. code::
 
-    -e git+https://github.com/bogeymin/htmgel/zipball/master#egg=htmgel
+    -e git+https://github.com/bogeymin/django-htmgel/zipball/master#egg=htmgel
 
 Or in your ``setup.py`` file:
 
@@ -33,7 +33,7 @@ Or in your ``setup.py`` file:
 
     install_requires=["htmgel"],
     dependency_links=[
-        "https://github.com/bogeymin/htmgel/zipball/master",
+        "https://github.com/bogeymin/django-htmgel/zipball/master",
     ]
 
 Settings

@@ -41,6 +41,7 @@ setup(
     author_email='shawn@ptltd.co',
     url='https://github.com/bogeymin/django-htmgel',
     packages=find_packages(),
+    include_package_data=True,
     install_requires=["BeautifulSoup"],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
