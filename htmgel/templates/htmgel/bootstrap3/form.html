@@ -5,7 +5,7 @@
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
             {% with message=error is_dismissible=True %}
-                {% include "includes/alert.html" %}
+                {% include "htmgel/bootstrap3/alert.html" %}
             {% endwith %}
         {% endfor %}
     {% elif form.errors %}
@@ -25,13 +25,13 @@
                     <p>{{ fieldset.description }}</p>
                 {% endif %}
                 {% for field in fieldset.fields %}
-                    {% include "includes/form_field.html"%}
+                    {% include "htmgel/bootstrap3/form_field.html"%}
                 {% endfor %}
             </fieldset>
         {% endfor %}
     {% else %}
         {% for field in form %}
-            {% include "includes/form_field.html" %}
+            {% include "htmgel/bootstrap3/form_field.html" %}
         {% endfor %}
     {% endif %}
 
