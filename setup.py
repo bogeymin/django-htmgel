@@ -1,45 +1,23 @@
 # See https://packaging.python.org/en/latest/distributing.html
 # and https://docs.python.org/2/distutils/setupscript.html
 # and https://pypi.python.org/pypi?%3Aaction=list_classifiers
-
-from os.path import join, exists as path_exists
 from setuptools import setup, find_packages
 
 
-def read_file(path):
+def read(path):
     with open(path, "rb") as f:
         contents = f.read()
         f.close()
     return contents
 
-
-def get_description():
-
-    files = ("README", "COPYING", "CHANGES", "TODO")
-    extensions = ("markdown", "md", "rst", "txt")
-
-    description = ""
-    for file_name in files:
-        for ext in extensions:
-            path = "%s.%s" % (file_name, ext)
-            if path_exists(path):
-                description += read_file(path)
-
-    return description
-
-
-def get_version():
-    return read_file("VERSION.txt")
-
-
 setup(
-    name='htmgel',
-    version=get_version(),
-    description='An app for working with HTML.',
-    long_description=get_description(),
+    name='django-htmgel',
+    version=read("VERSION.txt"),
+    description=read("DESCRIPTION.txt"),
+    long_description=read("README.markdown"),
     author='Shawn Davis',
-    author_email='shawn@ptltd.co',
-    url='https://github.com/bogeymin/django-htmgel',
+    author_email='shawn@develmaycare.com',
+    url='https://github.com/develmaycare/django-htmgel',
     packages=find_packages(),
     include_package_data=True,
     install_requires=["BeautifulSoup"],

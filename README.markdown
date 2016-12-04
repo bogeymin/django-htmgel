@@ -1,6 +1,6 @@
 # HTM Gel
 
-An app for working with HTML.
+An app for more easily working with HTML.
 
 ## Status
 
