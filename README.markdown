@@ -12,17 +12,17 @@ The API is changing at a rapid pace. Use at your own risk.
 
 To install:
 
-	pip install https://github.com/bogeymin/django-htmgel/zipball/master;
+	pip install https://github.com/develmaycare/django-htmgel.git;
 
 Or in your requirements file:
 
-	-e git+https://github.com/bogeymin/django-htmgel/zipball/master#egg=htmgel
+	git+https://github.com/develmaycare/django-htmgel.git
 
 Or in your ``setup.py`` file:
 
 	install_requires=["django-htmgel"],
 	dependency_links=[
-		"https://github.com/bogeymin/django-htmgel/zipball/master",
+		"https://github.com/develmaycare/django-htmgel.git",
 	]
 
 ## Settings
@@ -39,8 +39,9 @@ Define your framework:
 
 	HTML_FRAMEWORK = "bootstrap3"
 	
-> Note: ``bootstrap3`` is the only framework that is (sort of) fully supported at this 
-> time.
+> Note: ``bootstrap3`` is the only framework that is (sort of) fully supported at this time.
+
+``HTML_FRAMEWORK`` must appear in your context.
 
 ## Documentation
 
