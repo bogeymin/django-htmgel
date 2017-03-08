@@ -25,7 +25,7 @@ Example:
 {% elif HTML_FRAMEWORK == "foundation6" %}
     {% include "htmgel/foundation6/alert.html" %}
 {% else %}
-    <p class="alert {{ status|default:"error" }}">
+    <p class="alert alert-{{ status|default:"error" }}">
         {% if label %}<b>{{ label }}</b> {% endif %}
         {{ message }}
     </p>
