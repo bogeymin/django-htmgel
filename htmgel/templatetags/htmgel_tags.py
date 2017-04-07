@@ -60,7 +60,10 @@ def is_required_field(instance):
         in a template, i.e. ``field.field.required``.
 
     """
-    return instance.field.required
+    try:
+        return instance.field.required
+    except AttributeError:
+        return instance.required
 
 
 @register.filter("replace")
@@ -84,4 +87,7 @@ def widget_type(field):
         {% endif %}
 
     """
-    return field.field.widget.__class__.__name__
+    try:
+        return field.field.widget.__class__.__name__
+    except AttributeError:
+        return field.widget.__class__.__name__

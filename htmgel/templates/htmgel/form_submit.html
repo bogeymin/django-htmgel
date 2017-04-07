@@ -1,0 +1,28 @@
+{% comment %}
+form_submit.html
+================
+
+Displays a submit button. This is useful when you are manually controlling the ``<form>`` tag.
+A generic means for display most types of forms.
+
+**button_text** (str) The text displayed for the button. Defaults to ``Submit``.
+
+**cancel_text** (str) The label for the cancel link. Defaults to ``Cancel``.
+
+**cancel_url** (str) The URL for the cancel link. If omitted, no link is provided.
+
+Example:
+
+.. code::
+
+    {% include "htmgel/form_submit.html" with button_text="Send" %}
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/form_submit.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/form_submit.html" %}
+{% else %}
+    <!-- no default for form -->
+{% endif %}
