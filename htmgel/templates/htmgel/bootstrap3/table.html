@@ -1,8 +1,8 @@
-<table class="table {% if table.border}table-bordered{% endif %}{% if table.is_striped %}table-striped{% endif %}">
-    {% if table.caption %}<caption>{{ table.caption }}</caption>
+<table class="table {% if table.border %}table-bordered{% endif %}{% if table.is_striped %}table-striped{% endif %}">
+    {% if table.caption %}<caption>{{ table.caption }}</caption>{% endif %}
     <thead>
         {% for column in table.columns %}
-            <th>{{ column }}</th>
+            <th>{{ column.title }}</th>
         {% endfor %}
     </thead>
     <tbody>

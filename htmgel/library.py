@@ -28,7 +28,7 @@ class BaseHTML(object):
             which may be given as a ``str`` or ``list``.
 
         """
-        self._classes = kwargs.pop("classes")
+        self._classes = kwargs.pop("classes", "")
         self._attributes = kwargs
 
     def get_attributes(self):
@@ -127,8 +127,8 @@ class Table(BaseHTML):
     """
 
     def __init__(self, **kwargs):
-        self.caption = kwargs.pop("caption")
-        self.is_striped = kwargs.pop("is_striped")
+        self.caption = kwargs.pop("caption", None)
+        self.is_striped = kwargs.pop("is_striped", False)
         self._attributes = kwargs
         self._columns = list()
         self._rows = list()
@@ -208,7 +208,7 @@ class TableColumn(BaseHTML):
 
         super(TableColumn, self).__init__(**kwargs)
 
-        self._attributes['id'] = "table-%s" % name
+        self._attributes['id'] = "table-column-%s" % name
 
     def __str__(self):
         return self.title
