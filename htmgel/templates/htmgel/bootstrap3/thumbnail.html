@@ -6,13 +6,13 @@
     {% if object.thumbnail %}
         <img src="{{ object.thumbnail }}" alt="{{ object.title }}" height="{{ height|default:273 }}" width="{{ width|default:200 }}">
     {% else %}
-        <img src="{% static "images/blank-media-object.png" %}" height="{{ height|default:273 }" width="{ width|default:200 }}">
+        <img src="{% static "images/blank-media-object.png" %}" height="{{ height|default:273 }}" width="{{ width|default:200 }}">
     {% endif %}
 
     <div class="caption">
         <h3>{{ object.title }}</h3>
         <p>
-            {{ object.description:truncatewords:40 }}
+            {{ object.description|truncatewords:40 }}
         </p>
         <p>
             <a href="{{ object.get_absolute_url }}" class="btn btn-primary" role="button">
