@@ -1,0 +1,15 @@
+<div class="panel panel-{{ status|default:"default" }}">
+    {% if panel.title %}
+        <div class="panel-heading">
+            <h3>{{ title }}</h3>
+        </div>
+    {% endif %}
+    <div class="panel-body">
+        {{ content }}
+    </div>
+    {% if footer %}
+        <div class="panel-footer">
+            {{ panel.footer }}
+        </div>
+    {% endif %}
+</div>

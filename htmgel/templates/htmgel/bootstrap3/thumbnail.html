@@ -5,7 +5,6 @@
 
     {% if object.thumbnail %}
         <img src="{{ object.thumbnail }}" alt="{{ object.title }}" height="{{ height|default:273 }}" width="{{ width|default:200 }}">
-        {% image object.thumbnail fill-273x200 alt="{{ object }}" %}
     {% else %}
         <img src="{% static "images/blank-media-object.png" %}" height="{{ height|default:273 }" width="{ width|default:200 }}">
     {% endif %}
