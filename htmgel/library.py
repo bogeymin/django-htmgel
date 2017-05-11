@@ -109,6 +109,36 @@ class Anchor(BaseHTML):
         return mark_safe(html)
 
 
+class Breadcrumb(object):
+    """Helper class that ensures an object has the required attributes."""
+
+    def __init__(self, title=None, url=None):
+        self.title = title
+        self.url = url
+
+    def get_absolute_url(self):
+        return self.url
+
+
+class Breadcrumbs(object):
+    """Collect objects to be displayed as breadcrumbs."""
+
+    def __init__(self):
+        self.items = list()
+
+    def __iter__(self):
+        return iter(self.items)
+
+    def add(self, item):
+        """Add to the breadcrumb list.
+        
+        :param item: The item to be added.  
+        :type item: Breadcrumb
+
+        """
+        self.items.append(item)
+
+
 class Table(BaseHTML):
     """Represents an HTML table.
 
