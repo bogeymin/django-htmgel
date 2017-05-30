@@ -1,6 +1,9 @@
 # Imports
 
 from django import template
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -13,7 +16,36 @@ __all__ = (
     "widget_type",
 )
 
+# Constants
+
+ICON_FRAMEWORK = getattr(settings, "ICON_FRAMEWORK", "fontawesome")
+
 # Tags
+
+
+@register.simple_tag()
+def icon(name, framework=ICON_FRAMEWORK):
+    """Output an icon.
+    
+    :param name: The name of the icon.
+    :type name: str
+    
+    :param framework: The icon framework to use.
+    :type framework: str
+    
+    :rtype: str
+    
+    """
+    # TODO: It would be a LOT of work, but we *could* validate the given icon name against the selected framework. If
+    # the icon doesn't exist, we could raise an exception, log an error, or return a default.
+
+    if framework in ("fa", "fontawesome"):
+        return mark_safe('<i class="fa fa-%s" aria-hidden="true"></i>' % name)
+    elif framework in ("glyph", "glyphicon"):
+        return mark_safe('<span class="glyphicon glyphicon-%s" aria-hidden="true"></span>' % name)
+    else:
+        raise ImproperlyConfigured("Unrecognized ICON_FRAMEWORK: %s" % framework)
+
 
 @register.filter("get_attr")
 def get_attr(instance, name):
@@ -22,7 +54,7 @@ def get_attr(instance, name):
     :param instance: The instance.
     :type instance: object
 
-    :param: name
+    :param name: The attribute name.
     :type name: str
 
     """
