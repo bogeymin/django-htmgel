@@ -119,6 +119,7 @@ def widget_type(field):
         {% endif %}
 
     """
+
     try:
         return field.field.widget.__class__.__name__
     except AttributeError:
