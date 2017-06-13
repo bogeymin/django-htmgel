@@ -60,6 +60,8 @@
             {% endfor %}
         {% endif %}
     </div>
+{% elif field|widget_type == "HiddenInput" %}
+    {{ field }}
 {% elif field|widget_type == "RadioSelect" %}
     {# There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
     <div class="form-group{% if field.errors %} has-error{% endif %}">
