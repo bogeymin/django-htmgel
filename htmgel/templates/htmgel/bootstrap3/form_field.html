@@ -1,6 +1,6 @@
 {% load htmgel_tags %}
 
-{% if field|widget_type == "CheckboxInput" %}
+{% if field|widget_type == "CheckboxInput" or field|widget_type == "NullBooleanSelect" %}
     <div class="checkbox-inline">
         <label>
             <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}checked{% endif %}>
