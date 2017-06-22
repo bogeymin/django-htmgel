@@ -1,0 +1,159 @@
+{% load htmgel_tags %}
+
+{{ field.as_p }}
+
+    {% comment %}
+
+{% if field|widget_type == "CheckboxInput" or field|widget_type == "NullBooleanSelect" %}
+    <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}checked{% endif %}>
+    <div class="checkbox-inline">
+        <label>
+            <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}checked{% endif %}>
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% elif field|widget_type == "ClearableFileInput" %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}" class="control-label">
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {{ field }}
+
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+{% elif field|widget_type == "DateTimeInput" %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}" class="control-label">
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        <input type="text" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" value="{{ field.value|date:"m/d/Y H:i"|default_if_none:"" }}">
+
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% elif field|widget_type == "HiddenInput" %}
+    {{ field }}
+{% elif field|widget_type == "RadioSelect" %}
+    {# There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label>
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {{ field }}
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% elif field|widget_type == "Select" %}
+    {# There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}" class="control-label">
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {{ field }}
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% elif field|widget_type == "Textarea" or field|widget_type == "MarkdownWidget" %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}" class="control-label">
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        <textarea id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" rows="10">{{ field.value|default_if_none:"" }}</textarea>
+
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+{% else %}
+    <!-- {{ field|widget_type }} -->
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}" class="control-label">
+            {{ field.label }}
+            {% if field|is_required_field %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+
+        {% if field|widget_type == "PasswordInput" %}
+            <input type="password" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" value="{{ field.value|default_if_none:"" }}">
+        {% else %}
+            <!-- {{ field|widget_type }} -->
+            <input type="text" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" value="{{ field.value|default_if_none:"" }}">
+        {% endif %}
+
+        {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}
+    {% endcomment %}

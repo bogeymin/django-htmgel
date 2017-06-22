@@ -10,11 +10,13 @@ Example:
 
 .. code::
 
-    {% include "htmgel/form_field.html" %}
+    {% for field in form %}
+        {% include "htmgel/form_field.html" %}
+    {% endfor %}
 
 .. note::
     This requires that ``htmgel_tags`` be enabled in order to identify the widget. Also note that this template is
-    rarely used directly. See ``form.html``.
+    only used directly when you need more control over the form's layout. See ``form.html``.
 
 {% endcomment %}
 

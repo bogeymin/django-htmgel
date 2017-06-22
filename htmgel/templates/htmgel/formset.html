@@ -1,0 +1,75 @@
+{% comment %}
+formset.html
+============
+
+Display a formset.
+
+**formset** (object) The formset to be rendered.
+
+**mode** (str) ``tabular`` (default) or ``stacked``. NOT Implemented. Currently all formsets are rendered as tabular.
+
+.. note::
+    ``can_delete`` and ``can_order`` are acquired from the formset object.
+
+Example:
+
+.. code::
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% include "htmgel/formset.html" with formset=myformset can_add=True %}
+
+        {% include "htmgel/form_submit.html" %}
+
+    </form>
+
+Enabling Add
+------------
+
+Additional work is required to enable the "add another" functionality. Assuming your theme has an ``extra_js`` block,
+you would add this to the template in which the formset is displayed:
+
+.. code::
+
+    {% block extra_js %}
+        <script src="{% static "htmgel/js/jquery.formset.js" %}"></script>
+
+        <script type="text/javascript">
+        $(function() {
+            $('#formset tbody tr').formset();
+        })
+        </script>
+    {% endblock %}
+
+For convenience, HTMgel bundles the `jquery.formset.js`_ plugin.
+
+.. _jquery.formset.js: https://github.com/elo80ka/django-dynamic-formset/
+
+Error Styling
+-------------
+
+We've found that some Bootstrap themes cause errors to obfuscate the input text. If this is happening, consider adding
+some custom styling. For example:
+
+.. code:: css
+
+    /* Applying context styles to formsets in Cosmo makes the input text white. */
+    tr.danger input, tr.danger textarea {
+        color: #000000;
+    }
+
+Limitations
+-----------
+
+Currently only one formset per page is supported.
+
+{% endcomment %}
+
+{% if HTML_FRAMEWORK == "bootstrap3" %}
+    {% include "htmgel/bootstrap3/formset.html" %}
+{% elif HTML_FRAMEWORK == "foundation6" %}
+    {% include "htmgel/foundation6/formset.html" %}
+{% else %}
+    Sorry: Formset not implemented for {{ HTML_FRAMEWORK }}.
+{% endif %}
