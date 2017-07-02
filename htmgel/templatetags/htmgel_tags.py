@@ -1,6 +1,7 @@
 # Imports
 
 from django import template
+from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.safestring import mark_safe
@@ -124,3 +125,23 @@ def widget_type(field):
         return field.field.widget.__class__.__name__
     except AttributeError:
         return field.widget.__class__.__name__
+
+
+@register.filter
+def is_checkbox(field):
+    return isinstance(field.field.widget, forms.CheckboxInput)
+
+
+@register.filter
+def is_multiple_checkbox(field):
+    return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
+
+
+@register.filter
+def is_radio(field):
+    return isinstance(field.field.widget, forms.RadioSelect)
+
+
+@register.filter
+def is_file(field):
+    return isinstance(field.field.widget, forms.FileInput)

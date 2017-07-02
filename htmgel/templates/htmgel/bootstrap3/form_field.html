@@ -48,7 +48,12 @@
                 <span class="text-danger">*</span>
             {% endif %}
         </label>
-        <input type="text" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" value="{{ field.value|date:"m/d/Y H:i"|default_if_none:"" }}">
+        <div class="input-group date" data-onload-datetimepicker>
+        <input type="text" id="{{ field.id_for_label }}" class="form-control" name="{{ field.html_name }}" value="{{ field.value|date:"Y-m-d H:i"|default_if_none:"" }}">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        </span>
+        </div>
 
         {% if field.help_text %}
             <p class="help-block">{{ field.help_text }}</p>
