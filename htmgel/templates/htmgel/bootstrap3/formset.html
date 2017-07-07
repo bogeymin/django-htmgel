@@ -2,10 +2,55 @@
 {% load i18n %}
 
 {% if mode == "stacked" %}
-    {# TODO: Implement stacked formset. #}
-    Sorry: Stacked formset not implemented.
+    <div id="formset-{{ formset.prefix }}">
+        {{ formset.management_form }}
+
+        {% if formset.non_form_errors %}
+            {% trans "Problem" as label_x %}
+            {% for error in formset.non_form_errors %}
+                {% include "htmgel/alert.html" with label=label_x message=error %}
+            {% endfor %}
+        {% endif %}
+
+        {% for form in formset %}
+            <fieldset>
+                <legend>
+                    {% if form.instance.pk %}
+                        {{ form.instance }}
+                    {% else %}
+                        #{{ forloop.counter }}
+                    {% endif %}
+                </legend>
+                {% for field in form %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% elif field.name == "DELETE" %}
+                        <br>
+                       {{ field }} {% trans "Delete" %}
+                    {% else %}
+                        {% include "htmgel/form_field.html" %}
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        {% if include_empty %}
+            <fieldset id="{{ formset.prefix }}-empty-form" style="display: none;">
+                <legend>{{ legend }}</legend>
+                {% for field in formset.empty_form %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% elif field.name == "DELETE" %}
+                        <br>
+                        {{ field }} {% trans "Delete" %}
+                    {% else %}
+                        {% include "htmgel/form_field.html" %}
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+        {% endif %}
+    </div>
 {% else %}
-    <div id="formset">
+    <div id="{{ css_id|default:"formset" }}">
         {{ formset.management_form }}
 
         {% if formset.non_form_errors %}

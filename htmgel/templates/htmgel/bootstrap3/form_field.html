@@ -1,6 +1,6 @@
 {% load htmgel_tags %}
 
-{% if field|widget_type == "CheckboxInput" or field|widget_type == "NullBooleanSelect" %}
+{% if field|widget_type == "CheckboxInput" %}
     <div class="checkbox-inline">
         <label>
             <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}checked{% endif %}>
@@ -87,8 +87,9 @@
             {% endfor %}
         {% endif %}
     </div>
-{% elif field|widget_type == "Select" %}
-    {# There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
+{% elif field|widget_type == "Select" or field|widget_type == "LazySelect" or field|widget_type == "NullBooleanSelect" %}
+    {# Note: LazySelect is the widget type for django-country CountryField when {{ field }} is not used to render. #}
+    {# HACK: There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
     <div class="form-group{% if field.errors %} has-error{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
@@ -108,7 +109,7 @@
         {% endif %}
     </div>
 {% elif field|widget_type == "SelectMultiple" %}
-        {# There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
+    {# HACK: There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
     <div class="form-group{% if field.errors %} has-error{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
