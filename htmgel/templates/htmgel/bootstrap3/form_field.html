@@ -1,7 +1,7 @@
 {% load htmgel_tags %}
 
 {% if field|widget_type == "CheckboxInput" %}
-    <div class="checkbox-inline">
+    <div {% if extra_class %}class="{{ extra_class }}"{% endif %}>
         <label>
             <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.value %}checked{% endif %}>
             {{ field.label }}
@@ -9,6 +9,7 @@
                 <span class="text-danger">*</span>
             {% endif %}
         </label>
+
         {% if field.help_text %}
             <p class="help-block">{{ field.help_text }}</p>
         {% endif %}
@@ -20,13 +21,14 @@
         {% endif %}
     </div>
 {% elif field|widget_type == "ClearableFileInput" %}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
             {% if field|is_required_field %}
                 <span class="text-danger">*</span>
             {% endif %}
         </label>
+
         {{ field }}
 
         {% if field.help_text %}
@@ -41,7 +43,7 @@
 
     </div>
 {% elif field|widget_type == "DateTimeInput" %}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
             {% if field|is_required_field %}
@@ -69,14 +71,16 @@
     {{ field }}
 {% elif field|widget_type == "RadioSelect" %}
     {# There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label>
             {{ field.label }}
             {% if field|is_required_field %}
                 <span class="text-danger">*</span>
             {% endif %}
         </label>
+
         {{ field }}
+
         {% if field.help_text %}
             <p class="help-block">{{ field.help_text }}</p>
         {% endif %}
@@ -87,17 +91,20 @@
             {% endfor %}
         {% endif %}
     </div>
-{% elif field|widget_type == "Select" or field|widget_type == "LazySelect" or field|widget_type == "NullBooleanSelect" %}
+{#{% elif field|widget_type == "Select" or field|widget_type == "LazySelect" or field|widget_type == "NullBooleanSelect" %}#}
+{% elif field|is_select %}
     {# Note: LazySelect is the widget type for django-country CountryField when {{ field }} is not used to render. #}
     {# HACK: There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
             {% if field|is_required_field %}
                 <span class="text-danger">*</span>
             {% endif %}
         </label>
+
         {{ field }}
+
         {% if field.help_text %}
             <p class="help-block">{{ field.help_text }}</p>
         {% endif %}
@@ -110,7 +117,7 @@
     </div>
 {% elif field|widget_type == "SelectMultiple" %}
     {# HACK: There's no easy way to support this for Django *and* Bootstrap. So we'll do something custom here. #}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
             {% if field|is_required_field %}
@@ -118,7 +125,9 @@
             {% endif %}
         </label>
         <br>
+
         {{ field }}
+
         {% if field.help_text %}
             <p class="help-block">{{ field.help_text }}</p>
         {% endif %}
@@ -130,7 +139,7 @@
         {% endif %}
     </div>
 {% elif field|widget_type == "Textarea" or field|widget_type == "MarkdownWidget" %}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
             {% if field|is_required_field %}
@@ -152,7 +161,7 @@
     </div>
 {% else %}
     <!-- {{ field|widget_type }} -->
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <div class="form-group{% if field.errors %} has-error{% endif %} {% if extra_class %}{{ extra_class }}{% endif %}">
         <label for="{{ field.id_for_label }}" class="control-label">
             {{ field.label }}
             {% if field|is_required_field %}
