@@ -99,6 +99,11 @@ def is_required_field(instance):
         return instance.required
 
 
+@register.filter("is_select")
+def is_select(field):
+    return isinstance(field.field.widget, forms.Select)
+
+
 @register.filter("replace")
 def replace(text, from_string, to_string):
     """Replace a string."""
