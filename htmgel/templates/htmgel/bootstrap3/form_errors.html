@@ -1,0 +1,18 @@
+{% load i18n %}
+
+{% if form.non_field_errors %}
+    <div class="form-non-field-errors">
+        {% for error in form.non_field_errors %}
+            {% with message=error is_dismissible=True %}
+                {% include "htmgel/bootstrap3/alert.html" %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+{% elif form.errors %}
+    <div class="form-errors">
+        {% trans "Error" as label_x %}
+        {% trans "Please correct the problems below." as mesage_x %}
+        {% include "htmgel/alert.html" with enable_close=True label=label_x message=message_x %}
+    </div>
+{% else %}
+{% endif %}

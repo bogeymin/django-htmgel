@@ -2,18 +2,7 @@
 
 <form class="form-{{ form_class|default:"horizontal" }}" action="{{ action }}" method="{{ method|default:"post" }}"{% if multipart %} enctype="multipart/form-data"{% endif %}>
 
-    {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-            {% with message=error is_dismissible=True %}
-                {% include "htmgel/bootstrap3/alert.html" %}
-            {% endwith %}
-        {% endfor %}
-    {% elif form.errors %}
-        {% trans "Error" as label_x %}
-        {% trans "Please correct the problems below." as mesage_x %}
-        {% include "htmgel/alert.html" with enable_close=True label=label_x message=message_x %}
-    {% else %}
-    {% endif %}
+    {% include "htmgel/bootstrap3/form_errors.html" %}
 
     {% csrf_token %}
 
