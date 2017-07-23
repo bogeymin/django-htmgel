@@ -79,6 +79,32 @@ def get_index(obj, index):
         return None
 
 
+@register.filter("is_date")
+def is_date(field):
+    """Determines whether the field is a ``DateInput``."""
+    return isinstance(field.field.widget, forms.DateInput)
+
+
+@register.filter("is_required")
+def is_required(instance):
+    """Determine whether a given form field is required.
+
+    :param instance: The instance to be checked.
+    :type instance: Field
+
+    :rtype: bool
+
+    ..note::
+        This is a shortcut to the non-intuitive means of accessing ``required``
+        in a template, i.e. ``field.field.required``.
+
+    """
+    try:
+        return instance.field.required
+    except AttributeError:
+        return instance.required
+
+
 @register.filter("is_required_field")
 def is_required_field(instance):
     """Determine whether a given form field is required.
