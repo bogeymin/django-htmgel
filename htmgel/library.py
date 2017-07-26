@@ -2,6 +2,7 @@
 
 from copy import deepcopy
 from django.forms.utils import flatatt
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 # Exports
@@ -137,6 +138,28 @@ class Breadcrumbs(object):
 
         """
         self.items.append(item)
+
+    def append(self, label, url, pattern_args=None, pattern_kwargs=None):
+        """Add a breadcrumb to the list.
+
+        :param label: The breadcrumb label/text.
+        :type label: str || unicode
+
+        :param url: The URL or pattern name.
+        :type url: str || unicode
+
+        :param pattern_args: Pattern arguments when the URL is given as a pattern name.
+        :type pattern_args: list
+
+        :param pattern_kwargs: Pattern keyword arguments when the URL is given as a pattern name.
+        :type pattern_kwargs: dict
+
+        """
+        if pattern_args or pattern_kwargs:
+            url = reverse(url, args=pattern_args, kwargs=pattern_kwargs)
+
+        breadcrumb = Breadcrumb(label, url)
+        self.items.append(breadcrumb)
 
 
 class Table(BaseHTML):
