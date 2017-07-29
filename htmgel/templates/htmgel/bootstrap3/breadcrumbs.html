@@ -4,7 +4,7 @@
     <ol class="breadcrumb">
         {% if include_home %}
             <li>
-                <a href="/">{% trans "Home" %}</a>
+                <a href="{{ home_url|default:"/" }}">{% trans "Home" %}</a>
             </li>
         {% endif %}
         {% for crumb in breadcrumbs %}

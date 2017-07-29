@@ -7,6 +7,10 @@ Display breadcrumb navigation.
 **breadcrumbs** (iterable) A list of breadcrumb objects. The object must provide a ``title`` attribute and implement
 ``get_absolute_url()``.
 
+**home_text** (str) The text to use for the home page link. Defaults to ``{% trans "Home" %}``.
+
+**home_url** (str) The URL of the home page. Defaults to ``/``.
+
 **include_home** (bool) Indicates whether a home link should be added automatically.
 
 **label** (str) Optional label for the navigation. May not be used by all frameworks.
@@ -27,7 +31,8 @@ Example:
     <ol class="breadcrumb">
         {% if include_home %}
             <li>
-                <a href="/">{% trans "Home" %}</a>
+                {% trans "Home" as home_x %}
+                <a href="{{ home_url|default:"/" }}">{{ home_text|default:home_x }}</a>
             </li>
         {% endif %}
         {% for crumb in breadcrumbs %}
