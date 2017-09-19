@@ -1,10 +1,16 @@
 # Imports
 
+# noinspection PyPackageRequirements
 from django import template
+# noinspection PyPackageRequirements
 from django import forms
+# noinspection PyPackageRequirements
 from django.conf import settings
+# noinspection PyPackageRequirements
 from django.core.exceptions import ImproperlyConfigured
+# noinspection PyPackageRequirements
 from django.utils.safestring import mark_safe
+from ..shortcuts import get_currency_display
 
 register = template.Library()
 
@@ -19,33 +25,15 @@ __all__ = (
 
 # Constants
 
+DEFAULT_CURRENCY = getattr(settings, "DEFAULT_CURRENCY", "USD")
 ICON_FRAMEWORK = getattr(settings, "ICON_FRAMEWORK", "fontawesome")
 
 # Tags
 
 
 @register.simple_tag()
-def icon(name, framework=ICON_FRAMEWORK):
-    """Output an icon.
-    
-    :param name: The name of the icon.
-    :type name: str
-    
-    :param framework: The icon framework to use.
-    :type framework: str
-    
-    :rtype: str
-    
-    """
-    # TODO: It would be a LOT of work, but we *could* validate the given icon name against the selected framework. If
-    # the icon doesn't exist, we could raise an exception, log an error, or return a default.
-
-    if framework in ("fa", "fontawesome"):
-        return mark_safe('<i class="fa fa-%s" aria-hidden="true"></i>' % name)
-    elif framework in ("glyph", "glyphicon"):
-        return mark_safe('<span class="glyphicon glyphicon-%s" aria-hidden="true"></span>' % name)
-    else:
-        raise ImproperlyConfigured("Unrecognized ICON_FRAMEWORK: %s" % framework)
+def display_currency(amount, unit=DEFAULT_CURRENCY):
+    return get_currency_display(amount, unit=unit)
 
 
 @register.filter("get_attr")
@@ -77,6 +65,30 @@ def get_index(obj, index):
         return obj[index]
     except IndexError:
         return None
+
+
+@register.simple_tag()
+def icon(name, framework=ICON_FRAMEWORK):
+    """Output an icon.
+
+    :param name: The name of the icon.
+    :type name: str
+
+    :param framework: The icon framework to use.
+    :type framework: str
+
+    :rtype: str
+
+    """
+    # TODO: It would be a LOT of work, but we *could* validate the given icon name against the selected framework. If
+    # the icon doesn't exist, we could raise an exception, log an error, or return a default.
+
+    if framework in ("fa", "fontawesome"):
+        return mark_safe('<i class="fa fa-%s" aria-hidden="true"></i>' % name)
+    elif framework in ("glyph", "glyphicon"):
+        return mark_safe('<span class="glyphicon glyphicon-%s" aria-hidden="true"></span>' % name)
+    else:
+        raise ImproperlyConfigured("Unrecognized ICON_FRAMEWORK: %s" % framework)
 
 
 @register.filter("is_date")

@@ -3,3 +3,4 @@
 .idea
 demo
 docs/build
+tmp.*
