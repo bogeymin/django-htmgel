@@ -110,58 +110,6 @@ class Anchor(BaseHTML):
         return mark_safe(html)
 
 
-class Breadcrumb(object):
-    """Helper class that ensures an object has the required attributes."""
-
-    def __init__(self, title=None, url=None):
-        self.title = title
-        self.url = url
-
-    def get_absolute_url(self):
-        return self.url
-
-
-class Breadcrumbs(object):
-    """Collect objects to be displayed as breadcrumbs."""
-
-    def __init__(self):
-        self.items = list()
-
-    def __iter__(self):
-        return iter(self.items)
-
-    def add(self, item):
-        """Add to the breadcrumb list.
-        
-        :param item: The item to be added.  
-        :type item: Breadcrumb
-
-        """
-        self.items.append(item)
-
-    def append(self, label, url, pattern_args=None, pattern_kwargs=None):
-        """Add a breadcrumb to the list.
-
-        :param label: The breadcrumb label/text.
-        :type label: str || unicode
-
-        :param url: The URL or pattern name.
-        :type url: str || unicode
-
-        :param pattern_args: Pattern arguments when the URL is given as a pattern name.
-        :type pattern_args: list
-
-        :param pattern_kwargs: Pattern keyword arguments when the URL is given as a pattern name.
-        :type pattern_kwargs: dict
-
-        """
-        if pattern_args or pattern_kwargs:
-            url = reverse(url, args=pattern_args, kwargs=pattern_kwargs)
-
-        breadcrumb = Breadcrumb(label, url)
-        self.items.append(breadcrumb)
-
-
 class Table(BaseHTML):
     """Represents an HTML table.
 

@@ -17,10 +17,25 @@ register = template.Library()
 # Exports
 
 __all__ = (
+    "display_currency",
     "get_attr",
     "get_index",
-    "is_required_field",
-    "widget_type",
+    "icon",
+    "is_checkbox",
+    "is_clearable_file_input",
+    "is_date",
+    "is_date_time",
+    "is_file",
+    "is_hidden_input",
+    "is_markdown",
+    "is_multiple_checkbox",
+    "is_password",
+    "is_radio",
+    "is_required",
+    "is_select",
+    "is_select_multiple",
+    "is_text",
+    "replace",
 )
 
 # Constants
@@ -28,7 +43,7 @@ __all__ = (
 DEFAULT_CURRENCY = getattr(settings, "DEFAULT_CURRENCY", "USD")
 ICON_FRAMEWORK = getattr(settings, "ICON_FRAMEWORK", "fontawesome")
 
-# Tags
+# General Tags
 
 
 @register.simple_tag()
@@ -36,7 +51,7 @@ def display_currency(amount, unit=DEFAULT_CURRENCY):
     return get_currency_display(amount, unit=unit)
 
 
-@register.filter("get_attr")
+@register.filter
 def get_attr(instance, name):
     """Get the value of an attribute from a given instance.
 
@@ -50,7 +65,7 @@ def get_attr(instance, name):
     return getattr(instance, name)
 
 
-@register.filter("get_index")
+@register.filter
 def get_index(obj, index):
     """Get the value from the given index.
 
@@ -91,93 +106,17 @@ def icon(name, framework=ICON_FRAMEWORK):
         raise ImproperlyConfigured("Unrecognized ICON_FRAMEWORK: %s" % framework)
 
 
-@register.filter("is_date")
-def is_date(field):
-    """Determines whether the field is a ``DateInput``."""
-    return isinstance(field.field.widget, forms.DateInput)
-
-
-@register.filter("is_required")
-def is_required(instance):
-    """Determine whether a given form field is required.
-
-    :param instance: The instance to be checked.
-    :type instance: Field
-
-    :rtype: bool
-
-    ..note::
-        This is a shortcut to the non-intuitive means of accessing ``required``
-        in a template, i.e. ``field.field.required``.
-
-    """
-    try:
-        return instance.field.required
-    except AttributeError:
-        return instance.required
-
-
-@register.filter("is_required_field")
-def is_required_field(instance):
-    """Determine whether a given form field is required.
-
-    :param instance: The instance to be checked.
-    :type instance: Field
-
-    :rtype: bool
-
-    ..note::
-        This is a shortcut to the non-intuitive means of accessing ``required``
-        in a template, i.e. ``field.field.required``.
-
-    """
-    try:
-        return instance.field.required
-    except AttributeError:
-        return instance.required
-
-
-@register.filter("is_select")
-def is_select(field):
-    return isinstance(field.field.widget, forms.Select)
-
-
-@register.filter("replace")
+@register.filter
 def replace(text, from_string, to_string):
     """Replace a string."""
     return text.replace(from_string, to_string)
 
-
-@register.filter("widget_type")
-def widget_type(field):
-    """Determine a field's widget type on the fly.
-
-    :rtype: str
-
-    Example:
-
-    .. code::
-
-        {% if field|widget_type == "Textarea" %}
-            ...
-        {% endif %}
-
-    """
-
-    try:
-        return field.field.widget.__class__.__name__
-    except AttributeError:
-        return field.widget.__class__.__name__
+# Field-Related Tags
 
 
 @register.filter
 def is_checkbox(field):
     return isinstance(field.field.widget, forms.CheckboxInput)
-
-
-@register.filter
-def is_multiple_checkbox(field):
-    return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
 
 
 @register.filter
@@ -188,3 +127,106 @@ def is_radio(field):
 @register.filter
 def is_file(field):
     return isinstance(field.field.widget, forms.FileInput)
+
+
+@register.filter
+def is_checkbox(field):
+    return isinstance(field.field.widget, forms.CheckboxInput)
+
+
+@register.filter
+def is_clearable_file_input(field):
+    return isinstance(field.field.widget, forms.ClearableFileInput)
+
+
+@register.filter
+def is_date(field):
+    """Determines whether the field is a ``DateInput``."""
+    return isinstance(field.field.widget, forms.DateInput)
+
+
+@register.filter
+def is_date_time(field):
+    return isinstance(field.field.widget, forms.DateTimeInput)
+
+
+@register.filter
+def is_file(field):
+    return isinstance(field.field.widget, forms.FileInput)
+
+
+@register.filter
+def is_hidden_input(field):
+    return isinstance(field.field.widget, forms.HiddenInput)
+
+
+@register.filter
+def is_markdown(field):
+    return field.field.widget.__class__.__name__ == "MarkdownWidget"
+
+
+@register.filter
+def is_multiple_checkbox(field):
+    return isinstance(field.field.widget, forms.CheckboxSelectMultiple)
+
+
+@register.filter
+def is_password(field):
+    return isinstance(field.field.widget, forms.PasswordInput)
+
+
+@register.filter
+def is_radio(field):
+    return isinstance(field.field.widget, forms.RadioSelect)
+
+
+@register.filter
+def is_required(field):
+    """Determine whether a given form field is required.
+
+    :param field: The instance to be checked.
+    :type field: Field
+
+    :rtype: bool
+
+    ..note::
+        This is a shortcut to the non-intuitive means of accessing ``required``
+        in a template, i.e. ``field.field.required``.
+
+    """
+    try:
+        return field.field.required
+    except AttributeError:
+        return field.required
+
+
+@register.filter
+def is_select(field):
+    return isinstance(field.field.widget, forms.Select)
+
+
+@register.filter
+def is_select_multiple(field):
+    return isinstance(field.field.widget, forms.SelectMultiple)
+
+
+@register.filter
+def is_text(field):
+    return isinstance(field.field.widget, forms.Textarea)
+
+
+@register.filter
+def widget_type(field):
+    """Determine a field's widget type on the fly.
+    :rtype: str
+    Example:
+    .. code::
+        {% if field|widget_type == "Textarea" %}
+            ...
+        {% endif %}
+    """
+
+    try:
+        return field.field.widget.__class__.__name__
+    except AttributeError:
+        return field.widget.__class__.__name__

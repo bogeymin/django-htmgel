@@ -21,6 +21,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=["BeautifulSoup"],
+    extras_require = {
+        'bootstrap3': "django-htmgel-bootstrap3",
+        'bootstrap4': "django-htmgel-bootstrap4",
+        'foundation6': "django-htmgel-foundation6",
+    },
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
