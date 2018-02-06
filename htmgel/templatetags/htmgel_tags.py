@@ -120,11 +120,6 @@ def is_checkbox(field):
 
 
 @register.filter
-def is_radio(field):
-    return isinstance(field.field.widget, forms.RadioSelect)
-
-
-@register.filter
 def is_file(field):
     return isinstance(field.field.widget, forms.FileInput)
 
@@ -135,7 +130,7 @@ def is_checkbox(field):
 
 
 @register.filter
-def is_clearable_file_input(field):
+def is_clearable_file(field):
     return isinstance(field.field.widget, forms.ClearableFileInput)
 
 
@@ -146,7 +141,7 @@ def is_date(field):
 
 
 @register.filter
-def is_date_time(field):
+def is_datetime(field):
     return isinstance(field.field.widget, forms.DateTimeInput)
 
 
@@ -156,7 +151,7 @@ def is_file(field):
 
 
 @register.filter
-def is_hidden_input(field):
+def is_hidden(field):
     return isinstance(field.field.widget, forms.HiddenInput)
 
 

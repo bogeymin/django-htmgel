@@ -1,8 +1,13 @@
 # Imports
 
+from django.utils.safestring import mark_safe
 from .html import BaseHTML
 
 # Exports
+
+__all__ = (
+    "Fieldset",
+)
 
 # Classes
 
@@ -11,8 +16,9 @@ class Fieldset(BaseHTML):
     """A fieldset within a form."""
 
     def __init__(self, legend, fields=None, **kwargs):
-        super(Fieldset, self).__init__(legend, open_tag="fieldset")
+        super(Fieldset, self).__init__("", open_tag="fieldset")
         self.fields = fields or list()
+        self.legend = legend
 
     def __iter__(self):
         return iter(self.fields)
@@ -25,6 +31,7 @@ class Fieldset(BaseHTML):
         """
         self.fields.append(field)
 
+    @mark_safe
     def to_html(self):
         a = list()
         a.append("<%s>" % self.get_open_tag())
