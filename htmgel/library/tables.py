@@ -20,6 +20,14 @@ class Column(BaseHTML):
         self.name = name
         self._open_tag = "th"
 
+    @property
+    def label(self):
+        return self.content
+
+    @property
+    def title(self):
+        return self.content
+
 
 class Row(BaseHTML):
     """A row in an HTML table."""
@@ -27,6 +35,10 @@ class Row(BaseHTML):
     def __init__(self, data, **kwargs):
         super(Row, self).__init__(data, **kwargs)
         self._open_tag = "tr"
+
+    @property
+    def data(self):
+        return self.content
 
     @mark_safe
     def to_html(self):
