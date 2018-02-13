@@ -10,15 +10,15 @@ The API is changing at a rapid pace. Use at your own risk.
 
 To install with Twitter Bootstrap 3:
 
-    pip install htmgel[bootstrap3];
+    pip install htmgel[bootstrap3]; # TODO
 
 To install with Twitter Bootstrap 4:
 
-    pip install htmgel[bootstrap4];
+    pip install htmgel[bootstrap4]; # TODO
     
 To install with Foundation 6:
 
-    pip install htmgel[foundation6];
+    pip install htmgel[foundation6]; # TODO
 
 > Note: These instructions need to be tested.
 
