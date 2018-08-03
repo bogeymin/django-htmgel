@@ -1,3 +1,4 @@
+*.bak
 *.pyc
 .coverage
 .DS_Store

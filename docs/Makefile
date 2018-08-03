@@ -54,7 +54,7 @@ clean:
 
 .PHONY: html
 html:
-	./extract_template_comments.py
+	#./extract_template_comments.py
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	make robots;
 	@echo

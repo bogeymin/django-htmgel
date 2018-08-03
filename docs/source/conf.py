@@ -318,3 +318,6 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 import sphinx_rtd_theme
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+# TODO: The documentation build needs access to the templates contained in the newly created packages for bootstrap and
+# foundation.

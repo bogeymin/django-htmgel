@@ -16,7 +16,9 @@ class Fieldset(BaseHTML):
     """A fieldset within a form."""
 
     def __init__(self, legend, fields=None, **kwargs):
-        super(Fieldset, self).__init__("", open_tag="fieldset")
+        kwargs['open_tag'] = "fieldset"
+        super(Fieldset, self).__init__("", **kwargs)
+
         self.fields = fields or list()
         self.legend = legend
 
@@ -36,7 +38,7 @@ class Fieldset(BaseHTML):
         a = list()
         a.append("<%s>" % self.get_open_tag())
 
-        a.append("<legend>%s</legend>" % self.content)
+        a.append("<legend>%s</legend>" % self.legend)
 
         for f in self.fields:
             a.append(str(f))
