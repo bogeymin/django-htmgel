@@ -1,5 +1,5 @@
 import os
-import locator
+from . import locator
 
 PATH_TO_HTMGEL = os.path.dirname(os.path.abspath(locator.__file__))
 PATH_TO_HTMGEL_BOOTSTRAP3 = os.path.join(os.path.dirname(PATH_TO_HTMGEL), "htmgel_bootstrap3")
