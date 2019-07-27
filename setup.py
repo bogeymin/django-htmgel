@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 
 def read(path):
-    with open(path, "rb") as f:
+    with open(path, "r") as f:
         contents = f.read()
         f.close()
     return contents
@@ -20,7 +20,7 @@ setup(
     url='https://github.com/develmaycare/django-htmgel',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["BeautifulSoup"],
+    install_requires=["bs4"],
     extras_require = {
         'bootstrap3': "django-htmgel-bootstrap3",
         'bootstrap4': "django-htmgel-bootstrap4",

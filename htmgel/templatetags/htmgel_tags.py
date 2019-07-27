@@ -10,7 +10,8 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 # noinspection PyPackageRequirements
 from django.utils.safestring import mark_safe
-from ..shortcuts import get_currency_display
+import os
+from ..shortcuts import get_currency_display, parse_template
 
 register = template.Library()
 
@@ -22,11 +23,11 @@ __all__ = (
     "get_index",
     "icon",
     "is_checkbox",
-    "is_clearable_file_input",
+    "is_clearable_file",
     "is_date",
-    "is_date_time",
+    "is_datetime",
     "is_file",
-    "is_hidden_input",
+    "is_hidden",
     "is_markdown",
     "is_multiple_checkbox",
     "is_password",
@@ -42,6 +43,13 @@ __all__ = (
 
 DEFAULT_CURRENCY = getattr(settings, "DEFAULT_CURRENCY", "USD")
 ICON_FRAMEWORK = getattr(settings, "ICON_FRAMEWORK", "fontawesome")
+
+if "htmgel_bootstrap3" in settings.INSTALLED_APPS:
+    HTML_FRAMEWORK = "bootstrap3"
+elif "htmgel_bootstrap4" in settings.INSTALLED_APPS:
+    HTML_FRAMEWORK = "bootstrap4"
+else:
+    raise ImproperlyConfigured("HTML framework is not installed.")
 
 # General Tags
 
@@ -80,6 +88,29 @@ def get_index(obj, index):
         return obj[index]
     except IndexError:
         return None
+
+
+@register.simple_tag(takes_context=True)
+def html(context, path, **kwargs):
+    if ".html" not in path:
+        path += ".html"
+
+    template_path = os.path.join("htmgel", path)
+
+    # print("PATH =", template_path)
+    # print("CONTEXT =", context)
+    # print("-" * 80)
+
+    # The context argument is a RequestContext which is *not* a dictionary, but a contains a list of dictionaries that
+    # is iterable. To pass the context, we need to process each dictionary.
+    _context = dict()
+    for d in context:
+        _context.update(d)
+
+    # Add keyword arguments passed to the tag. These are specific to the template being loaded.
+    _context.update(kwargs)
+
+    return parse_template(template_path, _context)
 
 
 @register.simple_tag()
